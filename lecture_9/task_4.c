@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-#define N 9
+#define N 5
 
 int main(void) {
 

@@ -17,7 +17,7 @@ int main(void) {
 	int arr[N][N];
 
 	for (int i = 0; i < N * N; i++) {
-		**arr + i = i + 1;
+		*(*arr + i) = i + 1;
 	}
 
 	for (int i = 0; i < N; i++) {

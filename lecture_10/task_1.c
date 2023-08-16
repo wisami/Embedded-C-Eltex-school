@@ -11,22 +11,22 @@ int main(void) {
 	char *ptr4 = (char *) &a + 3;
 	
 	
-    printf("%p %p %p %p\n", (ptr), (ptr + 1), (ptr + 2), (ptr + 3));
-    printf("%d %d %d %d\n", *(ptr), *(ptr + 1), *(ptr + 2), *(ptr + 3));
+	printf("%p %p %p %p\n", (ptr), (ptr + 1), (ptr + 2), (ptr + 3));
+	printf("%d %d %d %d\n", *(ptr), *(ptr + 1), *(ptr + 2), *(ptr + 3));
     
-    *(ptr + 2) = 19;
+	*(ptr + 2) = 19;
     
 	printf("%d %d %d %d\n", *(ptr), *(ptr + 1), *(ptr + 2), *(ptr + 3));
 	printf("%d\n", a);
 	
 	
-    printf("\n************************ \n\n");
+	printf("\n************************ \n\n");
     
     
-    printf("%p %p %p %p\n", ptr1, ptr2, ptr3, ptr4);
-    printf("%d %d %d %d\n", *ptr1, *ptr2, *ptr3, *ptr4);
+	printf("%p %p %p %p\n", ptr1, ptr2, ptr3, ptr4);
+	printf("%d %d %d %d\n", *ptr1, *ptr2, *ptr3, *ptr4);
     
-    *ptr3 = 25;
+	*ptr3 = 25;
     
 	printf("%d %d %d %d\n", *ptr1, *ptr2, *ptr3, *ptr4);
 	printf("%d\n", a);
