@@ -14,13 +14,13 @@ void sig_winch(int signo) {
     resizeterm(size.ws_row, size.ws_col);
 }
 
-int main(void) {
+int main(int argc, char *argv[]) {
    
     WINDOW *wnd;
     WINDOW *subwnd;
     WINDOW *optwnd; 
     wchar_t ch;
-
+    char *path = NULL;
     int rows, cols;
 
     initscr();
@@ -45,6 +45,10 @@ int main(void) {
     raw();
     noecho();
     keypad(subwnd, TRUE);
+
+    if (argc == 2) {
+        open_file(subwnd, argv[1]);
+    }
 
     while (1) {
 
@@ -75,11 +79,11 @@ int main(void) {
                 break;
 
             case KEY_F(1):
-                wprintw(subwnd, "F1");
+                open_file(subwnd, NULL);
                 break;
 
             case KEY_F(2):
-                save(wnd);
+                save(subwnd);
                 break;
 
             case KEY_F(3):

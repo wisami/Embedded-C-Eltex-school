@@ -22,7 +22,7 @@ void backspace(WINDOW *wnd) {
         x = getmaxx(wnd) - 1;
         y--;
 
-        while (mvwinch(wnd, y, --x) == ' ' && x != 0)
+        while ((mvwinch(wnd, y, --x) & A_CHARTEXT) == ' ' && x != 0)
             continue;
 
         wmove(wnd, y, ++x);
@@ -36,18 +36,41 @@ void backspace(WINDOW *wnd) {
 
 }
 
+void open_file(WINDOW *wnd, char *path) {
+
+    const int size_name = 1024;
+    int index = 0;
+    char name[size_name];
+    char ch;
+
+    if (path != NULL) {
+        return;
+    }
+    else {
+
+        wprintw(wnd, "Enter name file:");
+        wrefresh(wnd);
+
+        while (ch = wgetch(wnd) != KEY_ENTER && index < size_name) {
+            wprintw(wnd, "%c", ch);
+            wrefresh(wnd);
+            name[index++] = ch;
+        }
+    }
+}
+
 void save(WINDOW *wnd) {
 
     FILE *fd;
     int rows, cols;
     getmaxyx(wnd, rows, cols);
-    rows -= 1; cols -= 1;
-    char text[rows][cols];
+    char text[rows][cols + 1];
 
-    for (int i = 1; i <= rows; i++) {
-        for (int j = 1; j <= cols; j++) {
-            text[i - 1][j - 1] = mvwinch(wnd, i, j);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            text[i][j] = (mvwinch(wnd, i, j) & A_CHARTEXT);
         }
+        text[i][cols] = '\0';
     }
 
     fd = fopen("text", "w");
